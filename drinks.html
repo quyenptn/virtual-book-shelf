@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff7e6" />
+    <title>Literati — Phòng trà & cà phê</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <script src="drinks.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Literati, trang chủ"><span class="brand-mark"><i data-lucide="book-open"></i></span> Literati <span class="brand-dot">.</span></a>
+      <nav aria-label="Điều hướng chính"><a class="nav-link" id="room-nav" href="index.html">Phòng đọc sách</a><a class="nav-link active" id="drinks-nav" href="drinks.html" aria-current="page">Phòng trà & cà phê</a></nav>
+      <div class="header-tools"><div class="language-switch" role="group" aria-label="Ngôn ngữ / Language"><button data-language="vi" lang="vi" aria-label="Tiếng Việt" aria-pressed="true">VI</button><button data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button></div></div>
+    </header>
+    <main>
+      <section id="drinks-room" class="drinks-room" aria-labelledby="drinks-title">
+        <p class="eyebrow" id="drinks-eyebrow">MỘT NGỤM, MỘT CÂU CHUYỆN</p><h1 id="drinks-title">Phòng trà & cà phê</h1>
+        <div class="drinks-scene">
+          <div class="room-backdrop" aria-hidden="true"><div class="room-window"><span></span></div><i class="room-curtain curtain-left"></i><i class="room-curtain curtain-right"></i><div class="room-sofa sofa-left"><i></i><i></i><i></i></div><div class="room-armchair"><i></i></div><div class="room-sofa sofa-right"><i></i><i></i><i></i></div><div class="room-rug"></div></div>
+          <div class="drink-table tea-table"><div class="tea-flight"><button class="tea-sample tea-green" data-tea="0" aria-haspopup="dialog" title="Trà xanh"><span class="tea-bowl" aria-hidden="true"><span class="tea-leaves"></span></span><span class="tea-name">Trà xanh</span></button><button class="tea-sample tea-white" data-tea="1" aria-haspopup="dialog" title="Trà trắng"><span class="tea-bowl" aria-hidden="true"><span class="tea-leaves"></span></span><span class="tea-name">Trà trắng</span></button><button class="tea-sample tea-oolong" data-tea="2" aria-haspopup="dialog" title="Trà ô long"><span class="tea-bowl" aria-hidden="true"><span class="tea-leaves"></span></span><span class="tea-name">Trà ô long</span></button><button class="tea-sample tea-black" data-tea="3" aria-haspopup="dialog" title="Trà đen"><span class="tea-bowl" aria-hidden="true"><span class="tea-leaves"></span></span><span class="tea-name">Trà đen</span></button><button class="tea-sample tea-puerh" data-tea="4" aria-haspopup="dialog" title="Trà Phổ Nhĩ"><span class="tea-bowl" aria-hidden="true"><span class="tea-leaves"></span></span><span class="tea-name">Trà Phổ Nhĩ</span></button><button class="tea-sample tea-herbal" data-tea="5" aria-haspopup="dialog" title="Trà thảo mộc"><span class="tea-bowl" aria-hidden="true"><span class="tea-flower"></span></span><span class="tea-name">Trà thảo mộc</span></button></div><button class="tea-overview" data-drink="tea" aria-haspopup="dialog"><i data-lucide="leaf"></i><span data-drink-label="tea">Bàn trà</span><i data-lucide="arrow-up-right"></i></button></div>
+          <div class="drink-table coffee-table"><div class="coffee-flight"><button class="coffee-sample" data-coffee="0" aria-haspopup="dialog" title="Arabica"><span class="coffee-bean bean-arabica" aria-hidden="true"></span><span class="coffee-name">Arabica</span></button><button class="coffee-sample" data-coffee="1" aria-haspopup="dialog" title="Robusta"><span class="coffee-bean bean-robusta" aria-hidden="true"></span><span class="coffee-name">Robusta</span></button><button class="coffee-sample" data-coffee="2" aria-haspopup="dialog" title="Liberica"><span class="coffee-bean bean-liberica" aria-hidden="true"></span><span class="coffee-name">Liberica</span></button><button class="coffee-sample" data-coffee="3" aria-haspopup="dialog" title="Excelsa"><span class="coffee-bean bean-excelsa" aria-hidden="true"></span><span class="coffee-name">Excelsa</span></button></div><button class="tea-overview" data-drink="coffee" aria-haspopup="dialog"><i data-lucide="coffee"></i><span data-drink-label="coffee">Bàn cà phê</span><i data-lucide="arrow-up-right"></i></button></div>
+          <button class="drink-table letter-table" data-drink="letter" aria-haspopup="dialog"><span class="letter-object" aria-hidden="true"><span class="letter-paper"></span><span class="letter-envelope"></span><span class="letter-seal"></span></span><span><i data-lucide="mail"></i><span data-drink-label="letter">Bàn thư</span><i data-lucide="arrow-up-right"></i></span></button>
+        </div>
+      </section>
+    </main>
+    <footer><a class="brand" href="index.html">Literati<span class="brand-dot">.</span></a><p>Một nơi nhỏ. Những câu chuyện lớn.</p><span>Chậm lại, và đọc một chút.</span></footer>
+    <dialog id="drink-dialog" aria-labelledby="drink-title"><button id="close-drink" class="icon-button dialog-close" aria-label="Đóng" title="Đóng"><i data-lucide="x"></i></button><div id="drink-content"></div></dialog>
+  </body>
+</html>

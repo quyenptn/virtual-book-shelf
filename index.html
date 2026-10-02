@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff7e6" />
+    <meta name="description" content="Một góc sách: căn phòng nhỏ để khám phá văn học, phát triển bản thân và nghệ thuật." />
+    <title>Literati — Căn phòng của những câu chuyện</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Một góc sách, trang chủ"><span class="brand-mark"><i data-lucide="book-open"></i></span> Literati <span class="brand-dot">.</span></a>
+      <nav aria-label="Điều hướng chính">
+        <button class="nav-link active" id="room-nav">Phòng đọc sách</button>
+        <a class="nav-link" id="drinks-nav" href="drinks.html">Phòng trà & cà phê</a>
+        <button class="nav-link" id="saved-nav"><span id="saved-label">Sách đã lưu</span> <span id="saved-count">0</span></button>
+      </nav>
+      <div class="header-tools"><div class="language-switch" role="group" aria-label="Ngôn ngữ / Language"><button data-language="vi" lang="vi" aria-label="Tiếng Việt" aria-pressed="true">VI</button><button data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button></div><button class="icon-button search-toggle" id="search-toggle" aria-label="Tìm sách" title="Tìm sách"><i data-lucide="search"></i></button></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow"><span></span> MỘT KHOẢNG LẶNG DÀNH RIÊNG CHO BẠN</p>
+        <h1 id="page-title"><em>Literati</em> chào bạn! <br /></h1>
+        <p class="intro-copy"> <br class="mobile-break" /> Hôm nay, bạn muốn ghé kệ sách nào?</p>
+      </section>
+
+      <section class="reading-room cover-room" aria-label="Căn phòng với kệ sách đang đọc, đã đọc và muốn đọc">
+        <div class="room-wall"></div>
+        <div class="sunlight"></div>
+        <button class="window" id="room-window" aria-label="Mở cửa sổ đón nắng" aria-pressed="false" title="Click để mở cửa sổ đón nắng"><span class="window-view" aria-hidden="true"></span><span class="window-pane pane-left" aria-hidden="true"></span><span class="window-pane pane-right" aria-hidden="true"></span><span class="curtain curtain-left" aria-hidden="true"></span><span class="curtain curtain-right" aria-hidden="true"></span><span class="window-sill" aria-hidden="true"></span></button>
+        <button class="wall-print" id="flower-print" type="button" aria-label="Chạm vào hoa trong tranh" title="Chạm vào hoa trong tranh"><span>take your<br /><em>time.</em></span><span class="print-flower" aria-hidden="true"><span class="flower-stem"></span><span class="flower-leaf"></span><span class="flower-bloom"></span></span></button>
+        <div class="wall-clock" aria-hidden="true"><span></span></div>
+        <div class="room-floor"></div>
+        <div class="rug" aria-hidden="true"></div>
+
+        <div id="mobile-shelf-tabs" class="mobile-shelf-tabs" role="group" aria-label="Kệ sách"></div>
+        <div id="room-shelves"></div>
+        <div class="sofa" aria-hidden="true"><div class="sofa-back"></div><div class="sofa-seat"></div><span class="sofa-arm arm-left"></span><span class="sofa-arm arm-right"></span><span class="sofa-pillow pillow-one"></span><span class="sofa-pillow pillow-two"></span><span class="sofa-leg leg-left"></span><span class="sofa-leg leg-right"></span></div>
+        <button class="room-cat sleeping" id="room-cat" title="Miu đang ngủ · Bấm để vuốt ve" aria-label="Miu đang nằm ngủ, bấm để vuốt ve" aria-describedby="cat-message"><span class="cat-speech" id="cat-message">Xoa đầu meow meow!</span><span class="cat-sleep" aria-hidden="true">z<span>z</span><span>Z</span></span><span class="cat-tail"></span><span class="cat-body"></span><span class="cat-head"><span class="cat-ear ear-left"></span><span class="cat-ear ear-right"></span><span class="cat-eye eye-left"></span><span class="cat-eye eye-right"></span><span class="cat-nose"></span><span class="cat-cheek cheek-left"></span><span class="cat-cheek cheek-right"></span><span class="cat-whiskers"></span></span><span class="cat-paw paw-left"></span><span class="cat-paw paw-right"></span><span class="cat-heart heart-one" aria-hidden="true">♥</span><span class="cat-heart heart-two" aria-hidden="true">♥</span><span class="cat-heart heart-three" aria-hidden="true">♥</span></button>
+        <div class="music-table"><div class="table-top" aria-hidden="true"></div><span class="table-leg table-leg-left" aria-hidden="true"></span><span class="table-leg table-leg-right" aria-hidden="true"></span><button class="room-speaker" id="room-speaker" aria-label="Phát nhạc đọc sách ngẫu nhiên" aria-pressed="false" title="Phát nhạc đọc sách"><span class="speaker-grille" aria-hidden="true"></span><span class="speaker-light" aria-hidden="true"></span><span class="speaker-control"><i data-lucide="play"></i></span></button><div class="table-cup" aria-hidden="true"></div></div>
+        <div class="room-note"><i data-lucide="sparkles"></i> "Reading is an exercise in empathy; an exercise in walking in someone else's shoes for a while." </div>
+      </section>
+
+      <section class="music-player" id="music-player" aria-label="Nhạc đọc sách" hidden>
+        <span class="music-mark"><i data-lucide="music-2"></i></span><div class="music-track"><span id="music-state" aria-live="polite">NHẠC TRONG PHÒNG</span><strong id="music-title"></strong><small>Giai điệu ambient tổng hợp · Một góc sách</small></div>
+        <div class="music-actions"><button class="icon-button" id="music-toggle" aria-label="Tạm dừng nhạc" title="Tạm dừng nhạc"><i data-lucide="pause"></i></button><button class="icon-button" id="music-next" aria-label="Chọn ngẫu nhiên bài khác" title="Bài ngẫu nhiên khác"><i data-lucide="shuffle"></i></button><label class="music-volume" title="Âm lượng"><i data-lucide="volume-1"></i><input id="music-volume" type="range" min="0" max="100" value="30" aria-label="Âm lượng nhạc"></label></div>
+      </section>
+
+      <section class="daily-note" aria-label="Trích dẫn hôm nay">
+        <span class="note-icon"><i data-lucide="coffee"></i></span>
+        <div><p class="eyebrow">MỘT CHÚT CẢM HỨNG</p><p class="quote">“Hãy sống trọn vẹn trong từng mùa khi nó đi qua; hãy hít thở không khí, uống ngụm nước lành, thưởng thức hương vị hoa trái, và thả mình vào nhịp điệu của đất trời.”</p><p class="quote-author">Henry David Thoreau <span>·</span> Walden</p></div>
+        <button id="daily-book" class="text-button">Gặp cuốn sách này <i data-lucide="arrow-right"></i></button>
+      </section>
+
+      <section class="collection" id="collection" aria-labelledby="collection-title">
+        <div class="collection-heading"><div><p class="eyebrow" id="collection-eyebrow">NHỮNG NGƯỜI BẠN TRÊN KỆ</p><h2 id="collection-title">Chọn một cuốn, mở một thế giới.</h2></div><span id="result-count"></span></div>
+        <div id="shelf-filters" class="shelf-filters" role="group" aria-label="Lọc theo kệ sách"></div>
+        <div class="search-field"><i data-lucide="search"></i><input id="search-input" type="search" placeholder="Tên sách, tác giả, hoặc một điều bạn quan tâm…" aria-label="Tìm theo tên sách hoặc tác giả" /><button class="icon-button" id="clear-search" aria-label="Xóa tìm kiếm" title="Xóa tìm kiếm" hidden><i data-lucide="x"></i></button></div>
+        <div id="book-grid" class="book-grid"></div>
+        <div id="empty-state" class="empty-state" hidden><i data-lucide="book-open"></i><h3 id="empty-title">Chưa tìm thấy cuốn sách nào.</h3><p id="empty-copy">Thử một tên sách hoặc tác giả khác nhé.</p><button class="text-button" id="reset-filters">Về với tất cả sách <i data-lucide="arrow-right"></i></button></div>
+      </section>
+    </main>
+
+    <footer><a class="brand" href="#">Literati<span class="brand-dot">.</span></a><p>Một nơi nhỏ. Những câu chuyện lớn.</p><span>Chậm lại, và đọc một chút.</span></footer>
+
+    <dialog id="book-dialog" aria-labelledby="dialog-title"><button class="icon-button dialog-close" id="close-dialog" aria-label="Đóng chi tiết" title="Đóng"><i data-lucide="x"></i></button><div id="dialog-content"></div></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
