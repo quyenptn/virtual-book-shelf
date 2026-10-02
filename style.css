@@ -197,7 +197,7 @@ dialog{border:1px solid #e5e0d5;border-radius:8px;background:#fdfbf6;color:var(-
 html[lang=en] .cover-room .shelf-label>span:nth-child(2){line-height:1.35}
 html[lang=en] .cover-room .shelf-label small{line-height:1.45}
 @media(max-width:600px){.site-header{height:auto;min-height:75px;flex-wrap:wrap;padding:13px 0 0;gap:4px 12px}.site-header .brand{order:0}.header-tools{order:1;margin-left:auto;gap:9px}.site-header nav{order:2;flex-basis:100%;justify-content:center;gap:26px}.site-header .nav-link{height:38px;font-size:10px}.language-switch button{height:25px;width:27px}}
-.drinks-room{max-width:1240px;width:calc(100% - 48px);margin:42px auto;scroll-margin-top:24px}.drinks-room h1,.drinks-room h2{font:400 25px var(--serif);margin:7px 0 26px}.site-header a.nav-link{display:inline-flex;align-items:center;text-decoration:none}
+.drinks-room{max-width:1240px;width:calc(100% - 48px);margin:42px auto;scroll-margin-top:24px}.drinks-room h1,.drinks-room h2{font:400 25px var(--serif);margin:7px 0 10px}.drinks-intro{max-width:620px;margin:0 0 12px;font-size:13px;line-height:1.75;opacity:.82}.site-header a.nav-link{display:inline-flex;align-items:center;text-decoration:none}
 .mobile-shelf-tabs{display:none}
 #flower-print{cursor:pointer;padding:0}
 .floor-lamp{position:absolute;left:21%;bottom:104px;width:54px;height:252px;padding:0;z-index:2}

@@ -117,6 +117,7 @@ const staticUI = [
   ['.site-header nav', 'Main navigation', 'aria-label'],
   ['#room-nav', 'The room', 'textContent'],
   ['#drinks-nav', 'Tea & coffee', 'textContent'],
+  ['#drinks-intro', 'Slow down with a cup of tea or coffee and explore the flavors and places behind each one. A little corner for a few stories, and for lingering a little longer.', 'textContent'],
   ['#flower-print', 'Touch the flower in the picture', 'aria-label'],
   ['#flower-print', 'Touch the flower in the picture', 'title'],
   ['#saved-label', 'Saved books', 'textContent'],
