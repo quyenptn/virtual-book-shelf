@@ -200,6 +200,15 @@ html[lang=en] .cover-room .shelf-label small{line-height:1.45}
 .drinks-room{max-width:1240px;width:calc(100% - 48px);margin:42px auto;scroll-margin-top:24px}.drinks-room h1,.drinks-room h2{font:400 25px var(--serif);margin:7px 0 26px}.site-header a.nav-link{display:inline-flex;align-items:center;text-decoration:none}
 .mobile-shelf-tabs{display:none}
 #flower-print{cursor:pointer;padding:0}
+.floor-lamp{position:absolute;left:21%;bottom:104px;width:54px;height:252px;padding:0;z-index:2}
+.lamp-glow{position:absolute;top:25px;left:-104px;width:260px;height:230px;opacity:0;pointer-events:none;background:linear-gradient(112deg,transparent 8%,#fff0b64d 48%,transparent 92%);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);transition:opacity .35s ease}
+.lamp-shade{position:absolute;top:0;left:8px;width:38px;height:46px;background:linear-gradient(90deg,#9a7655,#d4bd98 48%,#92704f);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);transition:filter .25s,background .25s}
+.lamp-shade:after{content:'';position:absolute;left:0;right:0;bottom:0;height:4px;border-radius:50%;background:#7f6045}
+.lamp-stem{position:absolute;top:41px;bottom:10px;left:25px;width:4px;border-radius:3px;background:linear-gradient(90deg,#80684d,#c4a67d 55%,#80684d)}
+.lamp-base{position:absolute;bottom:2px;left:8px;width:38px;height:9px;border-radius:50%;background:linear-gradient(#c3a77d,#81674d);box-shadow:0 2px 2px #55412f30}
+.cover-room.lamp-on .lamp-glow{opacity:.9}
+.cover-room.lamp-on .lamp-shade{background:linear-gradient(90deg,#c99c59,#ffebad 48%,#bb8d4d);filter:drop-shadow(0 0 9px #ffe5a6)}
+@media(max-width:700px){.floor-lamp{left:.5%;bottom:92px;width:30px;height:170px}.lamp-glow{top:20px;left:-53px;width:136px;height:150px}.lamp-shade{left:3px;width:24px;height:33px}.lamp-stem{top:29px;bottom:7px;left:14px;width:3px}.lamp-base{left:2px;width:26px;height:7px}}
 .cover-room #flower-print>.print-flower{position:absolute;display:block;left:calc(50% - 12px);bottom:3px;width:24px;height:24px;transform-origin:50% 100%;font-size:0;line-height:0}
 .flower-stem{position:absolute;left:12px;top:9px;width:2px;height:15px;background:#829568;border-radius:2px;transform:rotate(-8deg)}
 .flower-leaf{position:absolute;left:3px;top:16px;width:9px;height:5px;background:#a8b58a;border-radius:0 100% 0 100%;transform:rotate(12deg)}

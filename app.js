@@ -262,11 +262,11 @@ document.addEventListener('click', event => {
     else document.querySelector(`.bookcase[data-category="${status}"] [data-shelf-page="${-Number(direction)}"]`)?.focus({ preventScroll: true });
     return;
   }
-  const shelfTab = event.target.closest('[data-mobile-shelf]');
+  const shelfTab = event.target.closest('button[data-mobile-shelf]');
   if (shelfTab) {
     mobileShelf = shelfTab.dataset.mobileShelf;
     document.querySelector('.cover-room').dataset.mobileShelf = mobileShelf;
-    document.querySelectorAll('[data-mobile-shelf]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mobileShelf === mobileShelf)));
+    document.querySelectorAll('button[data-mobile-shelf]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mobileShelf === mobileShelf)));
     return;
   }
   const bookButton = event.target.closest('[data-book]');
@@ -290,6 +290,10 @@ document.querySelector('#room-nav').addEventListener('click', () => { selectCate
 document.querySelector('#reset-filters').addEventListener('click', () => selectCategory('all', false));
 document.querySelector('#daily-book').addEventListener('click', () => openBook('alchemist'));
 document.querySelector('#close-dialog').addEventListener('click', () => dialog.close());
+document.querySelector('#room-lamp').addEventListener('click', event => {
+  event.currentTarget.closest('.reading-room').classList.toggle('lamp-on');
+  updateRoomLabels();
+});
 document.querySelector('#room-window').addEventListener('click', event => {
   const windowButton = event.currentTarget;
   windowButton.closest('.reading-room').classList.toggle('window-open');
@@ -457,6 +461,12 @@ function updateRoomLabels() {
   const windowLabel = ui(isOpen ? 'Đóng cửa sổ' : 'Mở cửa sổ đón nắng');
   windowButton.setAttribute('aria-label', windowLabel);
   windowButton.title = windowLabel;
+  const lamp = document.querySelector('#room-lamp');
+  const lampOn = lamp.closest('.reading-room').classList.contains('lamp-on');
+  const lampLabel = ui(lampOn ? 'Tắt đèn đứng' : 'Bật đèn đứng');
+  lamp.setAttribute('aria-pressed', String(lampOn));
+  lamp.setAttribute('aria-label', lampLabel);
+  lamp.title = lampLabel;
   const cat = document.querySelector('#room-cat');
   const sleeping = cat.classList.contains('sleeping');
   cat.setAttribute('aria-label', ui(sleeping ? 'Miu đang nằm ngủ, bấm để vuốt ve' : 'Miu đang cười, bấm để vuốt ve thêm'));
