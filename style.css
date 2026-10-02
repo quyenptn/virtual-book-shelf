@@ -242,7 +242,8 @@ html[lang=en] .cover-room .shelf-label small{line-height:1.45}
 .room-window:before{content:'';position:absolute;inset:52% 0 0;background:radial-gradient(ellipse at 14% 100%,#748e58 0 28%,transparent 29%),radial-gradient(ellipse at 79% 100%,#809b64 0 34%,transparent 35%),linear-gradient(180deg,transparent 0 35%,#b9cc9b 36%)}
 .room-window span{position:absolute;inset:0;background:linear-gradient(132deg,transparent 0 46%,#ffffff65 46% 49%,transparent 50% 71%,#ffffff55 72% 74%,transparent 75%)}
 .room-curtain{position:absolute;top:2%;width:9%;height:57%;background:repeating-linear-gradient(90deg,#d9ae79 0 9px,#e9c58f 10px 20px);box-shadow:inset -8px 0 #b88b5e40;clip-path:polygon(0 0,100% 0,88% 64%,100% 100%,0 100%)}
-.curtain-left{left:31%}.curtain-right{right:31%;transform:scaleX(-1)}
+.drinks-scene .curtain-left{left:31%}.drinks-scene .curtain-right{right:31%;transform:scaleX(-1)}
+@media(max-width:700px){.cover-room .curtain-left{left:-14px}.cover-room .curtain-right{right:-14px}.drinks-scene .curtain-left{left:25%}.drinks-scene .curtain-right{right:25%}}
 .room-sofa{position:absolute;top:51%;width:29%;height:23%;border:3px solid #b97f88;border-radius:34px 34px 24px 24px;background:#e9aebc;box-shadow:0 8px 0 #b98483,0 14px 16px #695a4522}
 .sofa-left{left:1%;transform:rotate(-3deg)}.sofa-right{right:1%;transform:rotate(3deg)}
 .room-sofa:before{content:'';position:absolute;inset:5% 8% 36%;border:2px solid #c48992;border-radius:28px 28px 8px 8px;background:repeating-linear-gradient(90deg,transparent 0 28%,#c489924d 29% 30%,transparent 31%)}
