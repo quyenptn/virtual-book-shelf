@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css?v=room-fixes-20261003" />
+    <link rel="stylesheet" href="style.css?v=google-form-20261003" />
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-    <script src="i18n.js?v=fiction-filters-20261003" defer></script>
-    <script src="app.js?v=fiction-filters-20261003" defer></script>
+    <script src="i18n.js?v=google-form-20261003" defer></script>
+    <script src="app.js?v=google-form-20261003" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -62,7 +62,7 @@
       </section>
 
       <section class="collection" id="collection" aria-labelledby="collection-title">
-        <div class="collection-heading"><div><p class="eyebrow" id="collection-eyebrow">NHỮNG NGƯỜI BẠN TRÊN KỆ</p><h2 id="collection-title">Chọn một cuốn, mở một thế giới.</h2></div><span id="result-count"></span></div>
+        <div class="collection-heading"><div><p class="eyebrow" id="collection-eyebrow">NHỮNG NGƯỜI BẠN TRÊN KỆ</p><h2 id="collection-title">Chọn một cuốn, mở một thế giới.</h2></div><div class="collection-actions"><span id="result-count"></span><button class="primary-button add-book-button" id="add-book-toggle" type="button" aria-label="Thêm sách"><i data-lucide="plus"></i><span id="add-book-label">Thêm sách</span></button></div></div>
         <div id="shelf-filters" class="shelf-filters" role="group" aria-label="Lọc theo kệ sách"></div>
         <div class="metadata-filters"><select id="genre-filter" aria-label="Lọc theo thể loại"></select><select id="country-filter" aria-label="Lọc theo quốc gia của tác giả"></select></div>
         <div class="search-field"><i data-lucide="search"></i><input id="search-input" type="search" placeholder="Tên sách, tác giả, hoặc một điều bạn quan tâm…" aria-label="Tìm theo tên sách hoặc tác giả" /><button class="icon-button" id="clear-search" aria-label="Xóa tìm kiếm" title="Xóa tìm kiếm" hidden><i data-lucide="x"></i></button></div>
@@ -74,6 +74,14 @@
     <footer><a class="brand" href="#">Literati<span class="brand-dot">.</span></a><p>Một nơi nhỏ. Những câu chuyện lớn.</p><span>Chậm lại, và đọc một chút.</span></footer>
 
     <dialog id="book-dialog" aria-labelledby="dialog-title"><button class="icon-button dialog-close" id="close-dialog" aria-label="Đóng chi tiết" title="Đóng"><i data-lucide="x"></i></button><div id="dialog-content"></div></dialog>
+    <dialog id="add-book-dialog" aria-labelledby="add-book-title">
+      <button class="icon-button dialog-close" id="close-add-book" type="button" aria-label="Đóng" title="Đóng"><i data-lucide="x"></i></button>
+      <h2 id="add-book-title">Đề xuất sách</h2>
+      <p class="google-form-note" id="google-form-note">Biểu mẫu sẽ được gửi đến Google Forms của thư viện.</p>
+      <div class="google-form-frame">
+        <iframe title="Biểu mẫu đề xuất sách" src="https://docs.google.com/forms/d/e/1FAIpQLSfuCTseR63kXD29Zhns7OQnOAQIoZC49_yZ4XmCri7Byfyx8w/viewform?embedded=true" width="640" height="703" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">Đang tải biểu mẫu…</iframe>
+      </div>
+    </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>
 </html>

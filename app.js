@@ -302,13 +302,18 @@ try {
 } catch { state.statuses.alchemist = 'finished'; }
 const searchInput = document.querySelector('#search-input');
 const dialog = document.querySelector('#book-dialog');
+const addBookDialog = document.querySelector('#add-book-dialog');
 let toastTimer;
 
 function icons() { if (globalThis.lucide) globalThis.lucide.createIcons(); }
 function normalize(value) { return value.toLocaleLowerCase('vi').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd'); }
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+}
 function coverMarkup(book) {
-  const cover = book.cover || `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg?default=false`;
-  return `<div class="book-cover" style="--book-color:${book.color}"><div class="fallback-cover" lang="vi"><strong>${book.title}</strong><i></i><small>${book.author}</small></div><img src="${cover}" alt="${ui('Bìa sách')} ${book.title}" loading="lazy" /></div>`;
+  const cover = book.cover || (book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg?default=false` : '');
+  const image = cover ? `<img src="${escapeHTML(cover)}" alt="${ui('Bìa sách')} ${escapeHTML(book.title)}" loading="lazy" />` : '';
+  return `<div class="book-cover" style="--book-color:${book.color}"><div class="fallback-cover" lang="vi"><strong>${escapeHTML(book.title)}</strong><i></i><small>${escapeHTML(book.author)}</small></div>${image}</div>`;
 }
 function handleCoverErrors(container) {
   container.querySelectorAll('.book-cover img').forEach(image => {
@@ -356,7 +361,7 @@ function renderRoom() {
     const dense = !paged && shelfBooks.length > 4;
     const columns = dense ? 3 : 2;
     const rowCount = 2;
-    const rows = Array.from({ length: rowCount }, (_, rowIndex) => `<div class="shelf-row cover-row">${previewBooks.slice(rowIndex * columns, (rowIndex + 1) * columns).map(book => `<button class="shelf-book" data-book="${book.id}" title="${book.title} · ${book.author}" aria-label="${ui('Xem')} ${book.title}">${coverMarkup(book)}</button>`).join('')}</div>`).join('');
+    const rows = Array.from({ length: rowCount }, (_, rowIndex) => `<div class="shelf-row cover-row">${previewBooks.slice(rowIndex * columns, (rowIndex + 1) * columns).map(book => `<button class="shelf-book" data-book="${book.id}" title="${escapeHTML(book.title)} · ${escapeHTML(book.author)}" aria-label="${ui('Xem')} ${escapeHTML(book.title)}">${coverMarkup(book)}</button>`).join('')}</div>`).join('');
     const decor = dense || paged ? '' : '<div class="shelf-row decor-row" aria-hidden="true"><div class="stack"><span></span><span></span><span></span></div><div class="little-vase"><span></span></div></div>';
     const more = hasMore && !paged ? `<button class="shelf-more" data-filter="${status}">${ui('Xem thêm')} (${shelfBooks.length - previewBooks.length})<i data-lucide="arrow-right"></i></button>` : '';
     const previousLabel = uiLanguage === 'en' ? 'Previous group' : 'Nhóm trước';
@@ -402,12 +407,12 @@ function renderCollection() {
     const count = status === 'all' ? books.length : books.filter(book => state.statuses[book.id] === status).length;
     return `<button class="shelf-filter" data-filter="${status}" aria-pressed="${!state.savedOnly && state.category === status}">${ui(info.name)}<span class="filter-count">${count}</span></button>`;
   }).join('');
-  const countries = [...new Set(books.map(book => book.authorCountry))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
+  const countries = [...new Set(books.map(book => book.authorCountry).filter(Boolean))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
   genreFilter.setAttribute('aria-label', ui('Lọc theo thể loại'));
   genreFilter.innerHTML = `<option value="all">${ui('Mọi thể loại')}</option><option value="fiction">${ui('Hư cấu')}</option><option value="nonfiction">${ui('Phi hư cấu')}</option>`;
   genreFilter.value = state.genre;
   countryFilter.setAttribute('aria-label', ui('Lọc theo quốc gia của tác giả'));
-  countryFilter.innerHTML = `<option value="all">${ui('Mọi quốc gia')}</option>${countries.map(country => `<option value="${country}">${ui(country)}</option>`).join('')}`;
+  countryFilter.innerHTML = `<option value="all">${ui('Mọi quốc gia')}</option>${countries.map(country => `<option value="${escapeHTML(country)}">${escapeHTML(ui(country))}</option>`).join('')}`;
   countryFilter.value = state.country;
   const visibleBooks = books.filter(book => (state.category === 'all' || state.statuses[book.id] === state.category) && (!state.savedOnly || state.saved.has(book.id)) && (state.genre === 'all' || book.kind === state.genre) && (state.country === 'all' || book.authorCountry === state.country) && normalize(`${book.title} ${book.author} ${book.tags.join(' ')} ${(book.genres || []).join(' ')} ${book.authorCountry}`).includes(query));
   document.querySelector('#saved-count').textContent = state.saved.size;
@@ -422,7 +427,7 @@ function renderCollection() {
     tab.classList.toggle('selected', selected);
     tab.setAttribute('aria-pressed', String(selected));
   });
-  grid.innerHTML = visibleBooks.map(book => `<article class="book-card"><button class="book-open" data-book="${book.id}" aria-label="${ui('Xem chi tiết')} ${book.title}"><div class="cover-stage" style="--cover-bg:${categories[book.category].background}">${coverMarkup(book)}</div><p class="category-name">${ui(categories[book.category].name)}</p><h3 lang="vi">${book.title}</h3><p class="book-author">${book.author}</p></button><button class="icon-button save-book ${state.saved.has(book.id) ? 'saved' : ''}" data-save="${book.id}" aria-label="${ui(state.saved.has(book.id) ? 'Bỏ lưu' : 'Lưu')} ${book.title}" aria-pressed="${state.saved.has(book.id)}" title="${ui(state.saved.has(book.id) ? 'Bỏ lưu' : 'Lưu sách')}"><i data-lucide="bookmark"></i></button></article>`).join('');
+  grid.innerHTML = visibleBooks.map(book => `<article class="book-card"><button class="book-open" data-book="${book.id}" aria-label="${ui('Xem chi tiết')} ${escapeHTML(book.title)}"><div class="cover-stage" style="--cover-bg:${categories[book.category].background}">${coverMarkup(book)}</div><p class="category-name">${ui(categories[book.category].name)}</p><h3 lang="vi">${escapeHTML(book.title)}</h3><p class="book-author">${escapeHTML(book.author)}</p></button><button class="icon-button save-book ${state.saved.has(book.id) ? 'saved' : ''}" data-save="${book.id}" aria-label="${ui(state.saved.has(book.id) ? 'Bỏ lưu' : 'Lưu')} ${escapeHTML(book.title)}" aria-pressed="${state.saved.has(book.id)}" title="${ui(state.saved.has(book.id) ? 'Bỏ lưu' : 'Lưu sách')}"><i data-lucide="bookmark"></i></button></article>`).join('');
   document.querySelector('#empty-state').hidden = visibleBooks.length > 0;
   const emptySaved = state.savedOnly && !state.query;
   document.querySelector('#empty-title').textContent = ui(emptySaved ? 'Góc sách đang chờ bạn.' : 'Chưa tìm thấy cuốn sách nào.');
@@ -455,7 +460,9 @@ function openBook(id) {
   const expandedSummary = expandedBookSummaries[book.id];
   const summaryLanguage = uiLanguage === 'en' && (expandedSummary?.en || book.summaryEn) ? 'en' : 'vi';
   const summary = summaryLanguage === 'en' ? expandedSummary?.en || book.summaryEn : expandedSummary?.vi || book.summary;
-  document.querySelector('#dialog-content').innerHTML = `<div class="dialog-top"><div class="dialog-cover" style="--cover-bg:${categories[book.category].background}">${coverMarkup(book)}</div><div class="dialog-info"><p class="category-name">${ui(categories[book.category].name)}</p><h2 id="dialog-title">${book.title}</h2><p class="book-author">${book.author}</p><div class="metadata"><span>${ui('Xuất bản lần đầu')}: ${book.year}</span></div><button class="primary-button" id="dialog-save" data-save="${id}"></button></div></div><div class="dialog-section"><h3>${ui('Câu chuyện bên trong')}</h3><p lang="${summaryLanguage}">${summary}</p></div>`;
+  const summaryText = summary || ui('Chưa có tóm tắt cho cuốn sách này.');
+  const yearMarkup = book.year ? `<span>${ui('Xuất bản lần đầu')}: ${escapeHTML(book.year)}</span>` : '';
+  document.querySelector('#dialog-content').innerHTML = `<div class="dialog-top"><div class="dialog-cover" style="--cover-bg:${categories[book.category].background}">${coverMarkup(book)}</div><div class="dialog-info"><p class="category-name">${ui(categories[book.category].name)}</p><h2 id="dialog-title">${escapeHTML(book.title)}</h2><p class="book-author">${escapeHTML(book.author)}</p><div class="metadata">${yearMarkup}</div><button class="primary-button" id="dialog-save" data-save="${id}"></button></div></div><div class="dialog-section"><h3>${ui('Câu chuyện bên trong')}</h3><p lang="${summaryLanguage}">${summaryText}</p></div>`;
   if (book.yearLabel) document.querySelector('.metadata span').textContent = `${ui(book.yearLabel)}: ${ui(book.year)}`;
   if (book.genres?.length) document.querySelector('.metadata').insertAdjacentHTML('beforeend', `<span>${ui('Thể loại')}: ${book.genres.map(genre => ui(genre)).join(' · ')}</span>`);
   if (book.movement) document.querySelector('.metadata').insertAdjacentHTML('beforeend', `<span>${ui('Trường phái')}: ${ui(book.movement)}</span>`);
@@ -506,6 +513,8 @@ document.querySelector('#room-nav').addEventListener('click', () => { selectCate
 document.querySelector('#reset-filters').addEventListener('click', () => selectCategory('all', false));
 document.querySelector('#daily-book').addEventListener('click', () => openBook('alchemist'));
 document.querySelector('#close-dialog').addEventListener('click', () => dialog.close());
+document.querySelector('#add-book-toggle').addEventListener('click', () => addBookDialog.showModal());
+document.querySelector('#close-add-book').addEventListener('click', () => addBookDialog.close());
 document.querySelector('#room-lamp').addEventListener('click', event => {
   event.currentTarget.closest('.reading-room').classList.toggle('lamp-on');
   updateRoomLabels();
