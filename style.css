@@ -180,6 +180,9 @@ dialog{border:1px solid #e5e0d5;border-radius:8px;background:#fdfbf6;color:var(-
 .shelf-filter[aria-pressed=true]{border-bottom-color:var(--green);color:var(--green);font-weight:600}
 .shelf-filter:hover{color:var(--green)}
 .filter-count{font-size:10px;font-weight:400;color:var(--muted);flex-shrink:0}
+.metadata-filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.metadata-filters select{min-width:170px;max-width:100%;padding:8px 32px 8px 10px;border:1px solid var(--line);border-radius:4px;background:#ffffff80;color:var(--ink);font:inherit;font-size:11px}
+.metadata-filters select:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
 .cover-room .bookcase-blue .case-content{height:calc(100% - 76px)}
 .cover-room .bookcase-blue .shelf-label{height:76px}
 .cover-room .dense-shelf.has-more .case-content{grid-template-rows:repeat(var(--shelf-rows),minmax(0,1fr)) 32px}

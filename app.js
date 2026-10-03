@@ -21,6 +21,19 @@ const literaryMovements = {
   'god-small-things': 'Văn học hậu thuộc địa; ảnh hưởng hiện thực huyền ảo',
 };
 
+const authorCountries = {
+  'pillow-book': 'Nhật Bản', 'conversation-sicily': 'Ý', 'enchanted-april': 'Vương quốc Anh', 'walk-woods': 'Hoa Kỳ',
+  'bell-jar': 'Hoa Kỳ', 'god-small-things': 'Ấn Độ', 'white-nights': 'Nga', 'crime-punishment': 'Nga',
+  'on-earth': 'Hoa Kỳ', 'wedding-people': 'Hoa Kỳ', 'wretched-earth': 'Pháp', 'remarkably-bright-creatures': 'Hoa Kỳ',
+  yellowface: 'Hoa Kỳ', 'convenience-store-woman': 'Nhật Bản', alchemist: 'Hoa Kỳ', 'portrait-artist': 'Ireland',
+  'sweetness-power': 'Hoa Kỳ', 'tale-genji': 'Nhật Bản', 'nostalgie-heureuse': 'Bỉ', 'theo-golden': 'Hoa Kỳ',
+  'new-grub-street': 'Vương quốc Anh', 'hyunam-bookshop': 'Hàn Quốc', 'martin-eden': 'Hoa Kỳ', 'kafka-diaries': 'Cộng hòa Séc',
+  'history-drunkenness': 'Vương quốc Anh', 'salt-history': 'Hoa Kỳ', 'last-speakers': 'Hoa Kỳ', orientalism: 'Palestine',
+  'purity-danger': 'Vương quốc Anh', 'madame-bovary': 'Pháp', stoner: 'Hoa Kỳ', 'remains-of-the-day': 'Vương quốc Anh',
+  'book-of-disquiet': 'Bồ Đào Nha', 'master-and-margarita': 'Nga', 'the-door': 'Hungary',
+  'small-things-like-these': 'Ireland', 'the-lonely-city': 'Vương quốc Anh', 'map-of-salt-and-stars': 'Hoa Kỳ',
+};
+
 const books = [
   { id: 'pillow-book', title: 'The Pillow Book', author: 'Sei Shōnagon', category: 'literature', initialStatus: 'finished', year: 'Khoảng năm 1000', yearLabel: 'Biên soạn', isbn: '9780140448061', color: '#a7b5be', genres: ['Tùy bút', 'Ghi chép cá nhân'], movement: 'Văn học thời Heian', tags: ['Nhật Bản', 'Quan sát', 'Cung đình'], summary: 'Sei Shōnagon ghi lại những quan sát, kỷ niệm và suy nghĩ về đời sống cung đình Nhật Bản thời Heian. Qua các câu chuyện ngắn và danh sách những điều đẹp đẽ, thú vị hay khó chịu, tác phẩm mang đến một góc nhìn sắc sảo, hóm hỉnh về thiên nhiên, con người và những chi tiết nhỏ của đời sống.', summaryEn: 'Sei Shōnagon records observations, memories, and reflections on life at the Japanese imperial court during the Heian period. Through brief anecdotes and lists of things she finds beautiful, delightful, or irritating, she offers a witty, perceptive view of nature, people, and the small details of everyday life.' },
   { id: 'little-prince', title: 'Hoàng tử bé', author: 'Antoine de Saint-Exupéry', category: 'literature', year: 1943, pages: 96, isbn: '9780156012195', color: '#a7b5be', tags: ['Tình bạn', 'Tuổi thơ', 'Yêu thương'], summary: 'Một phi công gặp hoàng tử bé giữa sa mạc. Qua những câu chuyện về các hành tinh, một bông hồng và một con cáo, cậu bé giúp người lớn nhìn lại tình yêu, tình bạn và những điều tưởng chừng rất nhỏ nhưng vô cùng quan trọng.', detail: 'Câu chuyện có thể đọc ở mọi lứa tuổi, mỗi lần lại gợi một suy nghĩ mới. Lối kể trong trẻo kết hợp những hình minh họa của tác giả tạo nên một tác phẩm vừa dịu dàng, vừa có chiều sâu.' },
@@ -68,11 +81,12 @@ const books = [
   { id: 'book-of-disquiet', title: 'The Book of Disquiet', author: 'Fernando Pessoa', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/900685-M.jpg?default=false', initialStatus: 'wishlist', year: 1982, color: '#b2ad98', genres: ['Tùy bút', 'Văn xuôi'], tags: ['Lisbon', 'Cô đơn', 'Suy tưởng'], summary: 'Tập hợp những mảnh ghi chép gắn với Bernardo Soares, một nhân viên kế toán sống ở Lisbon. Những suy tưởng về công việc thường ngày, cô đơn và trí tưởng tượng tạo nên một bức chân dung nội tâm không theo lối tự sự tuyến tính.', summaryEn: 'A collection of fragments attributed to Bernardo Soares, an assistant bookkeeper in Lisbon. Reflections on routine, solitude, and imagination form an inward portrait rather than a linear narrative.' },
   { id: 'master-and-margarita', title: 'The Master and Margarita', author: 'Mikhail Bulgakov', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/15013644-M.jpg?default=false', initialStatus: 'wishlist', year: 1967, color: '#ad6e73', genres: ['Tiểu thuyết', 'Châm biếm'], tags: ['Moscow', 'Tình yêu', 'Kỳ ảo'], summary: 'Một vị khách bí ẩn cùng đoàn tùy tùng kỳ quái xuất hiện ở Moscow, mở ra câu chuyện đan xen giữa châm biếm xã hội, tình yêu của Margarita và số phận của một nhà văn.', summaryEn: 'A mysterious visitor and his strange entourage arrive in Moscow, setting off a story that weaves together social satire, Margarita’s love, and a writer’s fate.' },
   { id: 'the-door', title: 'The Door', author: 'Magda Szabó', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/1635484-M.jpg?default=false', initialStatus: 'wishlist', year: 1987, color: '#8caeab', genres: ['Tiểu thuyết'], tags: ['Hungary', 'Tình bạn', 'Bí mật'], summary: 'Một nhà văn và Emerence, người giúp việc lớn tuổi, xây dựng mối quan hệ gần gũi nhưng nhiều căng thẳng. Cánh cửa khép kín của Emerence trở thành trung tâm cho những suy ngẫm về tin cậy, riêng tư và lòng biết ơn.', summaryEn: 'A writer and Emerence, her older housekeeper, form a close but fraught relationship. Emerence’s closed door anchors reflections on trust, privacy, and gratitude.' },
-  { id: 'small-things-like-these', title: 'Small Things Like These', author: 'Claire Keegan', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/10507091-M.jpg?default=false', initialStatus: 'wishlist', year: 2021, color: '#95a28b', genres: ['Tiểu thuyết vừa'], tags: ['Ireland', 'Lòng can đảm', 'Cộng đồng'], summary: 'Vào mùa Giáng sinh năm 1985, người buôn than Bill Furlong phát hiện điều khiến anh không thể làm ngơ tại một tu viện địa phương. Một câu chuyện ngắn về lương tâm, lòng can đảm và sự im lặng của cộng đồng.', summaryEn: 'At Christmas in 1985, coal merchant Bill Furlong discovers something at a local convent that he cannot ignore. A short novel about conscience, courage, and a community’s silence.' },
+  { id: 'small-things-like-these', title: 'Small Things Like These', author: 'Claire Keegan', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/10507091-M.jpg?default=false', initialStatus: 'wishlist', year: 2021, color: '#95a28b', genres: ['Truyện vừa'], tags: ['Ireland', 'Lòng can đảm', 'Cộng đồng'], summary: 'Vào mùa Giáng sinh năm 1985, người buôn than Bill Furlong phát hiện điều khiến anh không thể làm ngơ tại một tu viện địa phương. Một câu chuyện ngắn về lương tâm, lòng can đảm và sự im lặng của cộng đồng.', summaryEn: 'At Christmas in 1985, coal merchant Bill Furlong discovers something at a local convent that he cannot ignore. A short novel about conscience, courage, and a community’s silence.' },
   { id: 'the-lonely-city', title: 'The Lonely City', author: 'Olivia Laing', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/12672997-M.jpg?default=false', initialStatus: 'wishlist', year: 2016, color: '#a7b5be', genres: ['Phi hư cấu', 'Phê bình nghệ thuật'], tags: ['New York', 'Cô đơn', 'Nghệ thuật'], summary: 'Olivia Laing suy ngẫm về trải nghiệm sống cô độc ở New York và tìm đến nghệ thuật để khám phá cách con người sống cùng cô đơn, khao khát kết nối và cảm giác thuộc về.', summaryEn: 'Olivia Laing reflects on living alone in New York and turns to art to explore how people experience loneliness, the desire for connection, and the search for belonging.' },
   { id: 'map-of-salt-and-stars', title: 'The Map of Salt and Stars', author: 'Zeyn Joukhadar', category: 'literature', cover: 'https://covers.openlibrary.org/b/id/9227917-M.jpg?default=false', initialStatus: 'wishlist', year: 2018, color: '#8caeab', genres: ['Tiểu thuyết'], tags: ['Syria', 'Di cư', 'Bản đồ'], summary: 'Nour cùng gia đình rời khỏi Syria trong chiến tranh; hành trình của cô đan xen với câu chuyện về Rawiya, cô gái tập sự vẽ bản đồ ở thế kỷ XII. Hai tuyến truyện gặp nhau qua lưu lạc, bản đồ và những câu chuyện được truyền lại.', summaryEn: 'Nour and her family flee war in Syria in a story interwoven with Rawiya, a twelfth-century girl apprenticed to a mapmaker. Their journeys meet through displacement, maps, and stories passed down.' },
 ].filter(book => book.id === 'alchemist' || book.initialStatus).map(book => ({
   ...book,
+  authorCountry: authorCountries[book.id],
   movement: book.movement || literaryMovements[book.id] || 'Không gắn với một trường phái cụ thể',
 }));
 
@@ -261,7 +275,7 @@ const expandedBookSummaries = {
 
 const existingStatuses = { alchemist: 'finished', 'norwegian-wood': 'wishlist', 'little-women': 'reading', ikigai: 'wishlist', essentialism: 'reading', 'steal-artist': 'wishlist', 'creative-act': 'reading', 'show-work': 'wishlist' };
 const defaultStatuses = Object.fromEntries(books.map(book => [book.id, book.initialStatus || existingStatuses[book.id]]));
-const state = { category: 'all', query: '', savedOnly: false, saved: new Set(), currentBook: null, statuses: { ...defaultStatuses } };
+const state = { category: 'all', genre: 'all', country: 'all', query: '', savedOnly: false, saved: new Set(), currentBook: null, statuses: { ...defaultStatuses } };
 try {
   const stored = JSON.parse(localStorage.getItem('mot-goc-sach-saved') || '[]');
   if (Array.isArray(stored)) state.saved = new Set(stored.filter(id => books.some(book => book.id === id)));
@@ -376,12 +390,22 @@ document.querySelector('#room-shelves').addEventListener('touchcancel', () => { 
 function renderCollection() {
   const query = normalize(state.query.trim());
   const filters = document.querySelector('#shelf-filters');
+  const genreFilter = document.querySelector('#genre-filter');
+  const countryFilter = document.querySelector('#country-filter');
   filters.setAttribute('aria-label', ui('Lọc theo kệ sách'));
   filters.innerHTML = [['all', { name: 'Tất cả' }], ...Object.entries(readingStatuses)].map(([status, info]) => {
     const count = status === 'all' ? books.length : books.filter(book => state.statuses[book.id] === status).length;
     return `<button class="shelf-filter" data-filter="${status}" aria-pressed="${!state.savedOnly && state.category === status}">${ui(info.name)}<span class="filter-count">${count}</span></button>`;
   }).join('');
-  const visibleBooks = books.filter(book => (state.category === 'all' || state.statuses[book.id] === state.category) && (!state.savedOnly || state.saved.has(book.id)) && normalize(`${book.title} ${book.author} ${book.tags.join(' ')}`).includes(query));
+  const genres = [...new Set(books.flatMap(book => book.genres || []))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
+  const countries = [...new Set(books.map(book => book.authorCountry))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
+  genreFilter.setAttribute('aria-label', ui('Lọc theo thể loại'));
+  genreFilter.innerHTML = `<option value="all">${ui('Mọi thể loại')}</option>${genres.map(genre => `<option value="${genre}">${ui(genre)}</option>`).join('')}`;
+  genreFilter.value = state.genre;
+  countryFilter.setAttribute('aria-label', ui('Lọc theo quốc gia của tác giả'));
+  countryFilter.innerHTML = `<option value="all">${ui('Mọi quốc gia')}</option>${countries.map(country => `<option value="${country}">${ui(country)}</option>`).join('')}`;
+  countryFilter.value = state.country;
+  const visibleBooks = books.filter(book => (state.category === 'all' || state.statuses[book.id] === state.category) && (!state.savedOnly || state.saved.has(book.id)) && (state.genre === 'all' || book.genres?.includes(state.genre)) && (state.country === 'all' || book.authorCountry === state.country) && normalize(`${book.title} ${book.author} ${book.tags.join(' ')} ${(book.genres || []).join(' ')} ${book.authorCountry}`).includes(query));
   document.querySelector('#saved-count').textContent = state.saved.size;
   document.querySelector('#result-count').textContent = uiBookCount(visibleBooks.length);
   document.querySelector('#collection-title').textContent = ui(state.savedOnly ? 'Góc sách của riêng bạn.' : state.category === 'all' ? 'Chọn một cuốn, mở một thế giới.' : readingStatuses[state.category].name);
@@ -404,6 +428,8 @@ function renderCollection() {
 }
 function selectCategory(category, scroll = true) {
   state.category = category;
+  state.genre = 'all';
+  state.country = 'all';
   state.savedOnly = false;
   state.query = '';
   searchInput.value = '';
@@ -467,6 +493,8 @@ document.addEventListener('click', event => {
   }
 });
 searchInput.addEventListener('input', () => { state.query = searchInput.value; renderCollection(); });
+document.querySelector('#genre-filter').addEventListener('change', event => { state.genre = event.target.value; state.savedOnly = false; renderCollection(); });
+document.querySelector('#country-filter').addEventListener('change', event => { state.country = event.target.value; state.savedOnly = false; renderCollection(); });
 document.querySelector('#clear-search').addEventListener('click', () => { state.query = ''; searchInput.value = ''; renderCollection(); searchInput.focus(); });
 document.querySelector('#search-toggle').addEventListener('click', () => { document.querySelector('#collection').scrollIntoView({ behavior: 'smooth' }); searchInput.focus({ preventScroll: true }); });
 document.querySelector('#saved-nav').addEventListener('click', () => { state.savedOnly = true; state.category = 'all'; state.query = ''; searchInput.value = ''; renderCollection(); document.querySelector('#collection').scrollIntoView({ behavior: 'smooth' }); });
