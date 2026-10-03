@@ -33,6 +33,10 @@ const authorCountries = {
   'book-of-disquiet': 'Bồ Đào Nha', 'master-and-margarita': 'Nga', 'the-door': 'Hungary',
   'small-things-like-these': 'Ireland', 'the-lonely-city': 'Vương quốc Anh', 'map-of-salt-and-stars': 'Hoa Kỳ',
 };
+const nonfictionBooks = new Set([
+  'pillow-book', 'walk-woods', 'wretched-earth', 'alchemist', 'sweetness-power', 'nostalgie-heureuse',
+  'kafka-diaries', 'history-drunkenness', 'salt-history', 'last-speakers', 'orientalism', 'purity-danger', 'the-lonely-city',
+]);
 
 const books = [
   { id: 'pillow-book', title: 'The Pillow Book', author: 'Sei Shōnagon', category: 'literature', initialStatus: 'finished', year: 'Khoảng năm 1000', yearLabel: 'Biên soạn', isbn: '9780140448061', color: '#a7b5be', genres: ['Tùy bút', 'Ghi chép cá nhân'], movement: 'Văn học thời Heian', tags: ['Nhật Bản', 'Quan sát', 'Cung đình'], summary: 'Sei Shōnagon ghi lại những quan sát, kỷ niệm và suy nghĩ về đời sống cung đình Nhật Bản thời Heian. Qua các câu chuyện ngắn và danh sách những điều đẹp đẽ, thú vị hay khó chịu, tác phẩm mang đến một góc nhìn sắc sảo, hóm hỉnh về thiên nhiên, con người và những chi tiết nhỏ của đời sống.', summaryEn: 'Sei Shōnagon records observations, memories, and reflections on life at the Japanese imperial court during the Heian period. Through brief anecdotes and lists of things she finds beautiful, delightful, or irritating, she offers a witty, perceptive view of nature, people, and the small details of everyday life.' },
@@ -87,6 +91,7 @@ const books = [
 ].filter(book => book.id === 'alchemist' || book.initialStatus).map(book => ({
   ...book,
   authorCountry: authorCountries[book.id],
+  kind: nonfictionBooks.has(book.id) ? 'nonfiction' : 'fiction',
   movement: book.movement || literaryMovements[book.id] || 'Không gắn với một trường phái cụ thể',
 }));
 
@@ -397,15 +402,14 @@ function renderCollection() {
     const count = status === 'all' ? books.length : books.filter(book => state.statuses[book.id] === status).length;
     return `<button class="shelf-filter" data-filter="${status}" aria-pressed="${!state.savedOnly && state.category === status}">${ui(info.name)}<span class="filter-count">${count}</span></button>`;
   }).join('');
-  const genres = [...new Set(books.flatMap(book => book.genres || []))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
   const countries = [...new Set(books.map(book => book.authorCountry))].sort((left, right) => ui(left).localeCompare(ui(right), uiLanguage));
   genreFilter.setAttribute('aria-label', ui('Lọc theo thể loại'));
-  genreFilter.innerHTML = `<option value="all">${ui('Mọi thể loại')}</option>${genres.map(genre => `<option value="${genre}">${ui(genre)}</option>`).join('')}`;
+  genreFilter.innerHTML = `<option value="all">${ui('Mọi thể loại')}</option><option value="fiction">${ui('Hư cấu')}</option><option value="nonfiction">${ui('Phi hư cấu')}</option>`;
   genreFilter.value = state.genre;
   countryFilter.setAttribute('aria-label', ui('Lọc theo quốc gia của tác giả'));
   countryFilter.innerHTML = `<option value="all">${ui('Mọi quốc gia')}</option>${countries.map(country => `<option value="${country}">${ui(country)}</option>`).join('')}`;
   countryFilter.value = state.country;
-  const visibleBooks = books.filter(book => (state.category === 'all' || state.statuses[book.id] === state.category) && (!state.savedOnly || state.saved.has(book.id)) && (state.genre === 'all' || book.genres?.includes(state.genre)) && (state.country === 'all' || book.authorCountry === state.country) && normalize(`${book.title} ${book.author} ${book.tags.join(' ')} ${(book.genres || []).join(' ')} ${book.authorCountry}`).includes(query));
+  const visibleBooks = books.filter(book => (state.category === 'all' || state.statuses[book.id] === state.category) && (!state.savedOnly || state.saved.has(book.id)) && (state.genre === 'all' || book.kind === state.genre) && (state.country === 'all' || book.authorCountry === state.country) && normalize(`${book.title} ${book.author} ${book.tags.join(' ')} ${(book.genres || []).join(' ')} ${book.authorCountry}`).includes(query));
   document.querySelector('#saved-count').textContent = state.saved.size;
   document.querySelector('#result-count').textContent = uiBookCount(visibleBooks.length);
   document.querySelector('#collection-title').textContent = ui(state.savedOnly ? 'Góc sách của riêng bạn.' : state.category === 'all' ? 'Chọn một cuốn, mở một thế giới.' : readingStatuses[state.category].name);

@@ -27,6 +27,7 @@ const englishUI = {
   'Lọc theo quốc gia của tác giả': 'Filter by author country',
   'Mọi thể loại': 'All genres',
   'Mọi quốc gia': 'All countries',
+  'Hư cấu': 'Fiction',
   'Xem': 'View',
   'Xem chi tiết': 'View details for',
   'Bìa sách': 'Book cover:',
