@@ -75,6 +75,18 @@ const teaSources = [
 let selectedDrink = null;
 let selectedTea = null;
 let selectedCoffee = null;
+const roomAudio = document.querySelector('#room-audio');
+const roomSpeaker = document.querySelector('#room-speaker');
+function updateRoomSpeaker() {
+  const english = uiLanguage === 'en';
+  const playing = !roomAudio.paused;
+  const label = playing ? (english ? 'Pause Star.mp3' : 'Tạm dừng Star.mp3') : (english ? 'Play Star.mp3' : 'Phát Star.mp3');
+  roomSpeaker.setAttribute('aria-pressed', String(playing));
+  roomSpeaker.setAttribute('aria-label', label);
+  roomSpeaker.title = label;
+  roomSpeaker.innerHTML = `<span class="wall-speaker-grille" aria-hidden="true"></span><i data-lucide="${playing ? 'pause' : 'volume-2'}" aria-hidden="true"></i>`;
+  globalThis.lucide?.createIcons();
+}
 function renderDrink() {
   if (selectedCoffee !== null) {
     const coffee = coffeeDetails[uiLanguage][selectedCoffee];
@@ -118,8 +130,25 @@ function refreshDrinks() {
   const close = document.querySelector('#close-drink');
   close.title = english ? 'Close' : 'Đóng';
   close.setAttribute('aria-label', close.title);
+  updateRoomSpeaker();
   renderDrink();
 }
+roomSpeaker.addEventListener('click', async () => {
+  if (!roomAudio.paused) {
+    roomAudio.pause();
+    return;
+  }
+  try {
+    await roomAudio.play();
+  } catch {
+    const message = uiLanguage === 'en' ? 'Could not play Star.mp3' : 'Không phát được Star.mp3';
+    roomSpeaker.setAttribute('aria-label', message);
+    roomSpeaker.title = message;
+  }
+});
+roomAudio.addEventListener('play', updateRoomSpeaker);
+roomAudio.addEventListener('pause', updateRoomSpeaker);
+roomAudio.addEventListener('ended', updateRoomSpeaker);
 document.querySelectorAll('[data-drink]').forEach(button => button.addEventListener('click', () => {
   selectedTea = null;
   selectedCoffee = null;
